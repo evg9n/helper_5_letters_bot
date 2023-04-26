@@ -10,7 +10,7 @@ from main import logger
         user_id=message.chat.id, chat_id=message.chat.id) in tuple_state and message.text == 'На своем месте'
 )
 def in_my_place(message: Message):
-    if dic[message.from_user.id] is None:
+    if dic.get(message.from_user.id) is None:
         create_user(message.from_user.id)
         logger.debug(f'Добавлен польватель {message.from_user.id} {dic[message.from_user.id]}')
 

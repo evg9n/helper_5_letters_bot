@@ -48,7 +48,7 @@ def start(message: Message):
     or message.text == back_or_menu_button[0]
 )
 def choice_handler(message: Message):
-    if dic[message.from_user.id] is None:
+    if dic.get(message.from_user.id) is None:
         create_user(message.from_user.id)
         logger.debug(f'Добавлен польватель {message.from_user.id} {dic[message.from_user.id]}')
 
@@ -123,36 +123,9 @@ def choice_handler(message: Message):
         bot.send_message(chat_id=message.from_user.id, text='Выбери:', reply_markup=alpha())
 
 
-# in_my_place
-# @bot.message_handler(
-#     func=lambda message: bot.get_state(
-#         user_id=message.chat.id, chat_id=message.chat.id) in tuple_state and message.text == 'На своем месте'
-# )
-# def in_my_place(message: Message):
-#     state = bot.get_state(user_id=message.chat.id, chat_id=message.chat.id)
-#     bot.set_state(user_id=message.from_user.id,
-#                   state=state + 'in_my_place',
-#                   chat_id=message.chat.id)
-#     bot.send_message(chat_id=message.from_user.id, text='Введи букву которая на своем месте:',
-#                      reply_markup=back_or_menu())
-
-
-# @bot.message_handler(
-#     func=lambda message: bot.get_state(
-#         user_id=message.chat.id, chat_id=message.chat.id) in tuple_state and message.text == 'Не на своем месте'
-# )
-# def in_my_not_place(message: Message):
-#     state = bot.get_state(user_id=message.chat.id, chat_id=message.chat.id)
-#     bot.set_state(user_id=message.from_user.id,
-#                   state=state + 'in_my_not_place',
-#                   chat_id=message.chat.id)
-#     bot.send_message(chat_id=message.from_user.id, text='Введи букву которая не на своем месте:',
-#                      reply_markup=back_or_menu())
-
-
 @bot.message_handler(state=StateHelp.not_alpha)
 def not_alpa_handlert(message: Message):
-    if dic[message.from_user.id] is None:
+    if dic.get(message.from_user.id) is None:
         create_user(message.from_user.id)
         logger.debug(f'Добавлен польватель {message.from_user.id} {dic[message.from_user.id]}')
 

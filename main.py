@@ -3,6 +3,7 @@ from telebot.custom_filters import StateFilter
 import handlers
 from logging import getLogger, DEBUG
 from logging.config import dictConfig
+from telebot.types import BotCommand
 
 
 FORMAT = "%(levelname)-8s [%(asctime)s] %(message)s"
@@ -49,7 +50,16 @@ dictConfig(log_config)
 logger = getLogger()
 
 
+DEFAULT_COMMANDS = (
+    ('start', "Запустить бота"),
+    ('help', "Вывести справку")
+)
+
+
 if __name__ == '__main__':
     logger.debug("Запуск бота")
     bot.add_custom_filter(StateFilter(bot))
+    bot.set_my_commands(
+        [BotCommand(*i) for i in DEFAULT_COMMANDS]
+    )
     bot.infinity_polling()
