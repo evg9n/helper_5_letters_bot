@@ -22,7 +22,7 @@ def create_user(user_id):
 def close(message: Message):
     if dic.get(message.from_user.id):
         dic.pop(message.from_user.id)
-        logger.debug(f'Удален польватель {message.from_user.id}')
+        logger.debug(f'Удален пользователь {message.from_user.id}')
     bot.set_state(user_id=message.from_user.id,
                   state=None,
                   chat_id=message.chat.id)
@@ -34,10 +34,10 @@ def start(message: Message):
     create_user(message.from_user.id)
 
     if message.text == choice_button[8]:
-        logger.debug(f'Сброшен польватель {message.from_user.id} {dic[message.from_user.id]}')
+        logger.debug(f'Сброшен пользователь {message.from_user.id} {dic[message.from_user.id]}')
         bot.send_message(message.from_user.id, 'Настройки сброшены', reply_markup=choice())
     else:
-        logger.debug(f'Добавлен польватель {message.from_user.id} {dic[message.from_user.id]}')
+        logger.debug(f'Добавлен пользователь {message.from_user.id} {dic[message.from_user.id]}')
         bot.send_message(message.from_user.id, 'Выбери:', reply_markup=choice())
 
 
@@ -50,7 +50,7 @@ def start(message: Message):
 def choice_handler(message: Message):
     if dic.get(message.from_user.id) is None:
         create_user(message.from_user.id)
-        logger.debug(f'Добавлен польватель {message.from_user.id} {dic[message.from_user.id]}')
+        logger.debug(f'Добавлен пользователь {message.from_user.id} {dic[message.from_user.id]}')
 
     if message.text == back_or_menu_button[0]:
         logger.debug(f'Назад {message.from_user.id}: {dic[message.from_user.id]}')
@@ -127,7 +127,7 @@ def choice_handler(message: Message):
 def not_alpa_handlert(message: Message):
     if dic.get(message.from_user.id) is None:
         create_user(message.from_user.id)
-        logger.debug(f'Добавлен польватель {message.from_user.id} {dic[message.from_user.id]}')
+        logger.debug(f'Добавлен пользователь {message.from_user.id} {dic[message.from_user.id]}')
 
     if message.text.isalpha():
         delete = ''
