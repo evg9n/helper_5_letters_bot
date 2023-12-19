@@ -4,6 +4,7 @@ import handlers
 from logging import getLogger, DEBUG
 from logging.config import dictConfig
 from telebot.types import BotCommand
+from os import path
 
 
 FORMAT = "%(levelname)-8s [%(asctime)s] %(message)s"
@@ -29,7 +30,7 @@ log_config = {
         'file_handler': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'level': DEBUG,
-            'filename': "logger.log",
+            'filename': path.abspath(path.join("loggers", "logger.log")),
             'encoding': 'utf-8',
             'when': 'D',
             'interval': 1,

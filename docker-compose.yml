@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: helper_5_letters_bot
+#    restart: unless-stopped
+    env_file:
+      - ./env/docker.env
+      - ./env/bot.env
+    volumes:
+      - ./loggers/:/app/loggers
+    command: ["python", "main.py"]
